@@ -1,0 +1,34 @@
+# Gradle build cache and outputs
+.gradle/
+build/
+.kotlin/
+
+# Machine-specific paths (Android SDK location)
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
+.navigation/
+
+# Build artifacts (APKs are shared via GitHub Releases, not committed)
+*.apk
+*.aab
+*.ap_
+*.dex
+output-metadata.json
+
+# Signing keys: never commit
+*.jks
+*.keystore
+keystore.properties
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

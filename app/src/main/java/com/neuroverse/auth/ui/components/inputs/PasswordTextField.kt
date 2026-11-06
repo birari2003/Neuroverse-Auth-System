@@ -45,7 +45,7 @@ fun PasswordTextField(
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = keyboardOptions.copy(
             keyboardType = KeyboardType.Password,
-            autoCorrect = false
+            autoCorrectEnabled = false
         ),
         keyboardActions = keyboardActions,
         enabled = enabled,

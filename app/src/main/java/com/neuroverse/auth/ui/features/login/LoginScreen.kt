@@ -49,8 +49,6 @@ fun LoginScreen(
         viewModel.effects.collectLatest { effect ->
             when (effect) {
                 is LoginUiEffect.NavigateToHome -> onNavigateToHome()
-                is LoginUiEffect.NavigateToForgotPassword -> onNavigateToForgotPassword()
-                is LoginUiEffect.NavigateToRegister -> onNavigateToRegister()
             }
         }
     }

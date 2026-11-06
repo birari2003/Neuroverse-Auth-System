@@ -20,6 +20,4 @@ sealed interface LoginUiEvent {
 
 sealed interface LoginUiEffect {
     data object NavigateToHome : LoginUiEffect
-    data object NavigateToForgotPassword : LoginUiEffect
-    data object NavigateToRegister : LoginUiEffect
 }

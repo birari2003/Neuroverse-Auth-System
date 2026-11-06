@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.neuroverse.auth.ui.theme.AuthAppTheme
 import com.neuroverse.auth.ui.theme.BrandGradient
 import com.neuroverse.auth.ui.theme.Dimens
