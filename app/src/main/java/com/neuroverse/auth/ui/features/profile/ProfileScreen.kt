@@ -21,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +31,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neuroverse.auth.R
 import com.neuroverse.auth.domain.model.User
+import com.neuroverse.auth.ui.features.account.AccountUiEvent
+import com.neuroverse.auth.ui.features.account.AccountUiState
+import com.neuroverse.auth.ui.features.account.AccountViewModel
 import com.neuroverse.auth.ui.components.buttons.PrimaryButton
 import com.neuroverse.auth.ui.components.data.InfoRow
 import com.neuroverse.auth.ui.components.data.ProfileAvatar
@@ -39,7 +41,6 @@ import com.neuroverse.auth.ui.components.dialogs.ConfirmDialog
 import com.neuroverse.auth.ui.components.layout.AppTopBar
 import com.neuroverse.auth.ui.theme.AuthAppTheme
 import com.neuroverse.auth.ui.theme.Dimens
-import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -47,18 +48,9 @@ import java.util.Locale
 @Composable
 fun ProfileScreen(
     onNavigateBack: () -> Unit,
-    onLoggedOut: () -> Unit,
-    viewModel: ProfileViewModel = hiltViewModel()
+    viewModel: AccountViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(viewModel.effects) {
-        viewModel.effects.collectLatest { effect ->
-            when (effect) {
-                is ProfileUiEffect.NavigateToWelcome -> onLoggedOut()
-            }
-        }
-    }
 
     ProfileContent(
         uiState = uiState,
@@ -69,8 +61,8 @@ fun ProfileScreen(
 
 @Composable
 fun ProfileContent(
-    uiState: ProfileUiState,
-    onEvent: (ProfileUiEvent) -> Unit,
+    uiState: AccountUiState,
+    onEvent: (AccountUiEvent) -> Unit,
     onNavigateBack: () -> Unit
 ) {
     val user = uiState.user
@@ -175,7 +167,7 @@ fun ProfileContent(
             // Reused logout action and confirm dialog
             PrimaryButton(
                 text = stringResource(R.string.action_logout),
-                onClick = { onEvent(ProfileUiEvent.RequestLogout) },
+                onClick = { onEvent(AccountUiEvent.RequestLogout) },
                 isLoading = uiState.isLoading
             )
         }
@@ -186,8 +178,8 @@ fun ProfileContent(
             title = stringResource(R.string.dialog_logout_title),
             message = stringResource(R.string.dialog_logout_message),
             confirmText = stringResource(R.string.action_logout),
-            onConfirm = { onEvent(ProfileUiEvent.ConfirmLogout) },
-            onDismiss = { onEvent(ProfileUiEvent.DismissLogoutDialog) }
+            onConfirm = { onEvent(AccountUiEvent.ConfirmLogout) },
+            onDismiss = { onEvent(AccountUiEvent.DismissLogoutDialog) }
         )
     }
 }
@@ -197,7 +189,7 @@ fun ProfileContent(
 private fun ProfileScreenPreview() {
     AuthAppTheme {
         ProfileContent(
-            uiState = ProfileUiState(
+            uiState = AccountUiState(
                 user = User("usr_demo", "Alex Mercer", "alex@neuroverse.com", 1700000000000L)
             ),
             onEvent = {},

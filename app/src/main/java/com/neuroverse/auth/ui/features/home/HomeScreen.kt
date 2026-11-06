@@ -23,7 +23,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +32,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.neuroverse.auth.R
 import com.neuroverse.auth.domain.model.User
+import com.neuroverse.auth.ui.features.account.AccountUiEvent
+import com.neuroverse.auth.ui.features.account.AccountUiState
+import com.neuroverse.auth.ui.features.account.AccountViewModel
 import com.neuroverse.auth.ui.components.buttons.SecondaryButton
 import com.neuroverse.auth.ui.components.data.FeatureCard
 import com.neuroverse.auth.ui.components.data.ProfileAvatar
@@ -40,23 +42,13 @@ import com.neuroverse.auth.ui.components.dialogs.ConfirmDialog
 import com.neuroverse.auth.ui.components.layout.AppTopBar
 import com.neuroverse.auth.ui.theme.AuthAppTheme
 import com.neuroverse.auth.ui.theme.Dimens
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeScreen(
     onNavigateToProfile: () -> Unit,
-    onLoggedOut: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: AccountViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    LaunchedEffect(viewModel.effects) {
-        viewModel.effects.collectLatest { effect ->
-            when (effect) {
-                is HomeUiEffect.NavigateToWelcome -> onLoggedOut()
-            }
-        }
-    }
 
     HomeContent(
         uiState = uiState,
@@ -67,8 +59,8 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-    uiState: HomeUiState,
-    onEvent: (HomeUiEvent) -> Unit,
+    uiState: AccountUiState,
+    onEvent: (AccountUiEvent) -> Unit,
     onNavigateToProfile: () -> Unit
 ) {
     val firstName = uiState.user?.name?.split(" ")?.firstOrNull() ?: stringResource(R.string.default_user_name)
@@ -153,7 +145,7 @@ fun HomeContent(
             // Log Out Button
             SecondaryButton(
                 text = stringResource(R.string.action_logout),
-                onClick = { onEvent(HomeUiEvent.RequestLogout) },
+                onClick = { onEvent(AccountUiEvent.RequestLogout) },
                 isLoading = uiState.isLoading
             )
         }
@@ -164,8 +156,8 @@ fun HomeContent(
             title = stringResource(R.string.dialog_logout_title),
             message = stringResource(R.string.dialog_logout_message),
             confirmText = stringResource(R.string.action_logout),
-            onConfirm = { onEvent(HomeUiEvent.ConfirmLogout) },
-            onDismiss = { onEvent(HomeUiEvent.DismissLogoutDialog) }
+            onConfirm = { onEvent(AccountUiEvent.ConfirmLogout) },
+            onDismiss = { onEvent(AccountUiEvent.DismissLogoutDialog) }
         )
     }
 }
@@ -175,7 +167,7 @@ fun HomeContent(
 private fun HomeScreenPreview() {
     AuthAppTheme {
         HomeContent(
-            uiState = HomeUiState(
+            uiState = AccountUiState(
                 user = User("1", "Alex Mercer", "alex@neuroverse.com", 1700000000000L)
             ),
             onEvent = {},
