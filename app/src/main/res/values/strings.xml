@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Details -->
+    <string name="app_name">Neuroverse Auth</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_navigate_back">Navigate back</string>
+    <string name="cd_show_password">Show password</string>
+    <string name="cd_hide_password">Hide password</string>
+    <string name="cd_user_profile">User profile</string>
+
+    <!-- Actions -->
+    <string name="action_login">Log In</string>
+    <string name="action_create_account">Create Account</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="action_forgot_password">Forgot password?</string>
+    <string name="action_send_reset_link">Send Reset Link</string>
+    <string name="action_back_to_login">Back to Log In</string>
+    <string name="action_logout">Log Out</string>
+    <string name="action_cancel">Cancel</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome</string>
+    <string name="welcome_subtitle">Enterprise-grade authentication with zero trust security.</string>
+
+    <!-- Registration Screen -->
+    <string name="register_title">Create account</string>
+    <string name="register_subtitle">Sign up to get started</string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="registration_successful">Account created successfully!</string>
+    <string name="password_rules_hint">At least 8 characters, with 1 uppercase, 1 lowercase and 1 number.</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Welcome back</string>
+    <string name="login_subtitle">Log in to your account</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+
+    <!-- Forgot Password Screen -->
+    <string name="forgot_password_title">Forgot password?</string>
+    <string name="forgot_password_subtitle">Enter your email and we\'ll send you a reset link.</string>
+    <string name="reset_success_title">Check your email</string>
+    <string name="reset_success_subtitle">We sent password reset instructions to %1$s if the account exists.</string>
+
+    <!-- Home Screen -->
+    <string name="title_home">Home</string>
+    <string name="home_greeting">Hello, %1$s</string>
+    <string name="home_subtitle">Your session is secure &amp; active</string>
+    <string name="default_user_name">Alex</string>
+    <string name="feature_secure_sessions_title">Encrypted StateFlow</string>
+    <string name="feature_secure_sessions_desc">In-memory reactive sessions with simulated cryptographic security.</string>
+    <string name="feature_protected_routes_title">Type-Safe Route Guard</string>
+    <string name="feature_protected_routes_desc">Unauthenticated visitors cannot access protected main graph destinations.</string>
+    <string name="feature_clean_architecture_title">Clean Architecture</string>
+    <string name="feature_clean_architecture_desc">Repository interfaces allow swapping to Firebase with 1 DI binding line.</string>
+
+    <!-- Profile Screen -->
+    <string name="title_profile">Profile</string>
+    <string name="profile_member_since">Member Since</string>
+    <string name="profile_user_id">User ID</string>
+
+    <!-- Fields -->
+    <string name="field_full_name">Full Name</string>
+    <string name="field_email">Email</string>
+    <string name="field_password">Password</string>
+    <string name="field_confirm_password">Confirm Password</string>
+
+    <!-- Logout Dialog -->
+    <string name="dialog_logout_title">Log Out</string>
+    <string name="dialog_logout_message">Are you sure you want to log out of your session?</string>
+
+    <!-- Validation Errors -->
+    <string name="error_name_empty">Please enter your full name</string>
+    <string name="error_name_too_short">Name is too short</string>
+    <string name="error_name_too_long">Name cannot exceed 50 characters</string>
+    <string name="error_email_empty">Please enter your email</string>
+    <string name="error_email_invalid">Enter a valid email address</string>
+    <string name="error_password_empty">Please enter your password</string>
+    <string name="error_password_length">Password must be at least 8 characters</string>
+    <string name="error_password_complexity">Include an uppercase letter, a lowercase letter and a number</string>
+    <string name="error_confirm_password_empty">Please confirm your password</string>
+    <string name="error_passwords_do_not_match">Passwords do not match</string>
+
+    <!-- Auth Domain Errors -->
+    <string name="error_invalid_credentials">Incorrect email or password</string>
+    <string name="error_email_already_registered">This email is already registered</string>
+    <string name="error_network_connection">Network error. Please check your connection and try again.</string>
+    <string name="error_unknown_occurred">An unexpected error occurred. Please try again.</string>
+</resources>
