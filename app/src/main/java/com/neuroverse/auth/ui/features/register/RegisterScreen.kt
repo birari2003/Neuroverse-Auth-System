@@ -1,5 +1,6 @@
 package com.neuroverse.auth.ui.features.register
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,12 +12,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -48,16 +47,15 @@ fun RegisterScreen(
     viewModel: RegisterViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
     LaunchedEffect(viewModel.effects) {
         viewModel.effects.collectLatest { effect ->
             when (effect) {
                 is RegisterUiEffect.NavigateToHome -> onNavigateToHome()
-                is RegisterUiEffect.NavigateToLogin -> onNavigateToLogin()
-                is RegisterUiEffect.ShowSnackbar -> {
-                    snackbarHostState.showSnackbar(effect.message.asString(context))
+                // Toast (not a screen snackbar) so the message stays visible while we navigate to Home.
+                is RegisterUiEffect.ShowSuccessMessage -> {
+                    Toast.makeText(context, effect.message.asString(context), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -67,8 +65,7 @@ fun RegisterScreen(
         uiState = uiState,
         onEvent = viewModel::onEvent,
         onNavigateBack = onNavigateBack,
-        onNavigateToLogin = onNavigateToLogin,
-        snackbarHostState = snackbarHostState
+        onNavigateToLogin = onNavigateToLogin
     )
 }
 
@@ -77,14 +74,12 @@ fun RegisterContent(
     uiState: RegisterUiState,
     onEvent: (RegisterUiEvent) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateToLogin: () -> Unit,
-    snackbarHostState: SnackbarHostState
+    onNavigateToLogin: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
     AuthScreenScaffold(
-        onNavigateBack = onNavigateBack,
-        snackbarHostState = snackbarHostState
+        onNavigateBack = onNavigateBack
     ) {
         AuthHeader(
             title = stringResource(R.string.register_title),
@@ -200,8 +195,7 @@ private fun RegisterScreenPreview() {
             uiState = RegisterUiState(),
             onEvent = {},
             onNavigateBack = {},
-            onNavigateToLogin = {},
-            snackbarHostState = SnackbarHostState()
+            onNavigateToLogin = {}
         )
     }
 }

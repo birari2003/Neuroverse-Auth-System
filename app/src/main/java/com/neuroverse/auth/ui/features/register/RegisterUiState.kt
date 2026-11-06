@@ -26,6 +26,5 @@ sealed interface RegisterUiEvent {
 
 sealed interface RegisterUiEffect {
     data object NavigateToHome : RegisterUiEffect
-    data object NavigateToLogin : RegisterUiEffect
-    data class ShowSnackbar(val message: UiText) : RegisterUiEffect
+    data class ShowSuccessMessage(val message: UiText) : RegisterUiEffect
 }

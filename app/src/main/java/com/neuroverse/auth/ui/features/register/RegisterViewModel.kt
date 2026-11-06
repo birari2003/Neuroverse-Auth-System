@@ -97,7 +97,7 @@ class RegisterViewModel @Inject constructor(
 
             when (result) {
                 is AppResult.Success -> {
-                    _effects.send(RegisterUiEffect.ShowSnackbar(UiText.StringResource(R.string.registration_successful)))
+                    _effects.send(RegisterUiEffect.ShowSuccessMessage(UiText.StringResource(R.string.registration_successful)))
                     _effects.send(RegisterUiEffect.NavigateToHome)
                 }
                 is AppResult.Error -> {
