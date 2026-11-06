@@ -84,5 +84,6 @@
     <string name="error_invalid_credentials">Incorrect email or password</string>
     <string name="error_email_already_registered">This email is already registered</string>
     <string name="error_network_connection">Network error. Please check your connection and try again.</string>
+    <string name="error_too_many_requests">Too many attempts. Please wait a moment and try again.</string>
     <string name="error_unknown_occurred">An unexpected error occurred. Please try again.</string>
 </resources>

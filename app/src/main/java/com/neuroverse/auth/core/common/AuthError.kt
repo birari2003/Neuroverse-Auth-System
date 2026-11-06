@@ -9,6 +9,7 @@ sealed interface AuthError {
     data object InvalidCredentials : AuthError
     data object EmailAlreadyInUse : AuthError
     data object Network : AuthError
+    data object TooManyRequests : AuthError
     data object Unknown : AuthError
 }
 
@@ -19,5 +20,6 @@ fun AuthError.asUiText(): UiText = when (this) {
     AuthError.InvalidCredentials -> UiText.StringResource(R.string.error_invalid_credentials)
     AuthError.EmailAlreadyInUse -> UiText.StringResource(R.string.error_email_already_registered)
     AuthError.Network -> UiText.StringResource(R.string.error_network_connection)
+    AuthError.TooManyRequests -> UiText.StringResource(R.string.error_too_many_requests)
     AuthError.Unknown -> UiText.StringResource(R.string.error_unknown_occurred)
 }

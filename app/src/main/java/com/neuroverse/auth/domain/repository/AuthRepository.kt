@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 /**
  * Domain authentication repository interface.
- * Implemented by FakeAuthRepository now and easily swapped with FirebaseAuthRepository later.
+ * Implemented by FirebaseAuthRepository (production) and FakeAuthRepository (tests and local demos).
  */
 interface AuthRepository {
     val authState: Flow<AuthSession?>

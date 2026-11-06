@@ -65,7 +65,7 @@ class FakeAuthRepository @Inject constructor() : AuthRepository {
                 createdAtMillis = System.currentTimeMillis()
             )
             accounts[email] = StoredAccount(newUser, password.hashCode())
-            val session = AuthSession(newUser, "token_" + UUID.randomUUID().toString())
+            val session = AuthSession(newUser)
             _authState.value = session
             return AppResult.Success(newUser)
         }
@@ -81,7 +81,7 @@ class FakeAuthRepository @Inject constructor() : AuthRepository {
                 // Return generic invalid credentials (never reveal if email exists)
                 return AppResult.Error(AuthError.InvalidCredentials)
             }
-            val session = AuthSession(account.user, "token_" + UUID.randomUUID().toString())
+            val session = AuthSession(account.user)
             _authState.value = session
             return AppResult.Success(account.user)
         }
